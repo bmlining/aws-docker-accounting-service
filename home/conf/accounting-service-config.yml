@@ -1,0 +1,46 @@
+server:
+  shutdownGracePeriod: 0s
+  applicationConnectors:
+    - type: http
+      port: 8080
+  adminConnectors:
+    - type: http
+      port: 8081
+
+logging:
+
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: INFO
+
+  appenders:
+    - type: console
+
+storageServiceClientType: ${CATALOG_STORE:-IN_MEMORY}
+
+blobStoreType: ${BLOB_STORE:-IN_MEMORY_BLOB_STORE}
+
+elasticSearchConfiguration:
+    url: ${ELASTICSEARCH_URL:-http://localhost:9200}
+
+oracleObjectStoreConfiguration:
+    url: ${OBJECTSTORE_URL:-https://api.storage.oraclecloud.com}
+    serviceName: ${OBJECTSTORE_SERVICE_NAME:-apicatalog}
+    identityDomain: ${OBJECTSTORE_IDENTITY_DOMAIN:-api}
+    userName: ${OBJECTSTORE_USER_NAME:-gautam.priya@oracle.com}
+    password: ${OBJECTSTORE_PASSWORD:-Simple2)}
+    defaultContainerId: ${OBJECTSTORE_DEFAULT_CONTAINER:-containerX}
+
+#
+# Feature toggle flags
+# To turn a feature on, set its toggle to true
+# Default writeRESTOperationsEnabled to false after fixing the tests in build.sh docker_test()
+# See JIRA task https://jira.oraclecorp.com/jira/browse/CSDK-261
+featureToggles:
+    writeRESTOperationsEnabled: ${WRITE_OPERATIONS_ENABLED:-true}
+
+#
+# UI configuration
+# 
+uiConfiguration:
+    enabled: ${ENABLE_UI:-true}
+    enableApiDocs: ${ENABLE_API_DOCS:-true}

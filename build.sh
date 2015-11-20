@@ -11,13 +11,6 @@ export HOME="${SCRIPT_DIR}/home"
 
 SCRATCH_DIR=$(mktemp -d catalog-docker.XXXXXXXXXX)
 
-determine_catalog_version()
-{
-	if [ "${CATALOG_VERSION}" == ""  -o "${CATALOG_VERSION}" == "+" ]; then
-		CATALOG_VERSION=$(curl -q "${ARTIFACTORY_URL}/api/search/latestVersion?g=${CATALOG_GROUPID}&a=${CATALOG_ARTIFACTID}&repos=${CATALOG_REPO}&remote=1")
-	fi
-}
-
 docker_build()
 {
 	docker build -f "${SCRATCH_DIR}/Dockerfile" --rm=true "--no-cache=${NO_CACHE}" -t "${TAG}" "${SCRIPT_DIR}"

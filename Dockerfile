@@ -1,4 +1,4 @@
-FROM jeanblanchard/busybox-java:8
+FROM jeanblanchard/java:8
 
 MAINTAINER brian.lininger@gmail.com
 
